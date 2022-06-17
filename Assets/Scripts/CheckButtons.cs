@@ -36,20 +36,22 @@ public class CheckButtons : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+
         score = startTime - limit;
         if (startCountdown == false && limit > 0)
         {
-            StartCoroutine(countdownClock());
-        }
-
-        if(button1.active && button2.active && button3.active && limit > 0)
-        {
+            if(button1.active && button2.active && button3.active && limit > 0)
+            {
                 finishedGame.color = Color.green;
                 finishedGame.text ="COMPLETED! Your time was " + score + " seconds!";
-                timer.text = "";
                 StopCoroutine(countdownClock());
-        } 
+            } 
+            else 
+            {
+                StartCoroutine(countdownClock());
+            }
+        }
 
         if(limit <= 0)
         {
