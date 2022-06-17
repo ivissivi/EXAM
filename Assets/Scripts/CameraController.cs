@@ -9,8 +9,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform arms;
     [SerializeField] private Transform body;
 
-    private float xRotation;
-    private float yRotation;
+    private float xRotation = 0;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
@@ -18,9 +22,9 @@ public class CameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        arms.localRotation = Quaternion.Euler(new Vector3(xRotation, 0, 0));
-        body.Rotate(new Vector3(0, mouseX, 0));
+        transform.localRotation = Quaternion.Euler(new Vector3(xRotation, 0, 0));
+        body.Rotate(Vector3.up * mouseX);
     }
 }

@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        moveDirection = new Vector3(moveX, 0, moveZ);
+        moveDirection = transform.right * moveX + transform.forward * moveZ;
         moveDirection = moveDirection.normalized; //same speed for moving diagonally
 
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
